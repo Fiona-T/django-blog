@@ -79,6 +79,12 @@
         </div>
         <div class="col-md-4 card mb-4  mt-3 ">
             <div class="card-body">
+                <!-- if commented value is true, then display note below instead of the comment form -->
+                {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting approval.
+                </div>
+                {% else %}
                 <!-- Form for logged in user to add comments -->
                 {% if user.is_authenticated %}
                 <h3>Leave a comment:</h3>
@@ -88,6 +94,7 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                 </form>
+                {% endif %}
                 {% endif %}
             </div>
         </div>
