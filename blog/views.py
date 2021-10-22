@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 # generic for generic views - part of class based views
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .models import Post
 from .forms import CommentForm
 
@@ -69,6 +70,8 @@ class PostDetail(View):
             # assign a post to it, then save it
             comment.post = post
             comment.save()
+            # add message to confirm comment submitted
+            messages.add_message(request, messages.SUCCESS, 'Comment successfully submitted')
         else:
             # if form wasn't valid then return an empty form
             comment_form = CommentForm()
